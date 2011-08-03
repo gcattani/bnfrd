@@ -18,21 +18,20 @@ To execute the script, simply run it from the terminal:
 
 ### Input File
 
-Currently, **bnfrd** only supports simple text files containing only positive numbers, like the following example:
+Since version 1, **bnfrd** supports any text file and it's flexible enough to avoid non-digits and parse correctly negative and decimal numbers. Some examples of accepted lines:
 
 	12345
-	13456
-	23456
-	98765
+	-2345
+	0.345
+	"456"
+	'-0.05'
+	"JOHN DOE","678"
 
 ## TODO
 
 Upcoming features in order of priority.
 
-* Support for decimal and negative numbers
 * Test file as user input
-* Support for delimited values (e.g. "12345", '12345', etc...)
-* Ignore non-numerical strings
 * Output a graph
 
 ## Copyright

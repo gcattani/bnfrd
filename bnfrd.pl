@@ -2,7 +2,7 @@
 
 # bnfrd - a script to test for Benford's Law
 #
-# Version 0.1 - 2011/08/01
+# Version 1 - 2011/08/03
 #
 # (c) Giovanni Cattani 2011
 # Released under GNU General Public License v.3
@@ -24,10 +24,10 @@ my @percent = (0, 0, 0, 0, 0, 0, 0, 0, 0);
 my @differ = (0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 while(my $line = <TXT>){
-			
-	my $char = chr ord $line;		# Reads first character of the string
-	
-	$howmany[$char]++;
+	if($line =~ m/.*?([1-9])/){	# Matches the first digit between 1 and 9 in the line
+		my $char = $1;
+		$howmany[$char]++;
+	}		
 }
 
 ($howmany[0] += $_) for @howmany;	# Sums all the values in the array
@@ -44,8 +44,10 @@ for(my $i = 0; $i < 9; $i++){
 
 my $datetime = strftime( '%Y-%m-%d %H:%M:%S', localtime );
 
-print BENFORD "BNFRD.PL OUTPUT FILE\n$datetime\n\nTOT 1 2 3 4 5 6 7 8 9\n@howmany\n";
-print BENFORD "\n@percent\n@differ\n";
+$" = "\t";	# Sets the output field separator to the tab character
+
+print BENFORD "BNFRD.PL OUTPUT FILE\n$datetime\n\nTOT\t1\t2\t3\t4\t5\t6\t7\t8\t9\n@howmany\n";
+print BENFORD "\nPERCENTAGES FOR INPUT FILE:\t@percent\nCOMPARED WITH BENFORD'S LAW:\t@differ\n\n";
 
 close BENFORD;
 close TXT;
